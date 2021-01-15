@@ -1,1 +1,5 @@
-# contact-manager-server
+>>> npm install
+
+>>> node server.js
+
+>>> done ;)
