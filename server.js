@@ -13,6 +13,12 @@ app.listen(3000, () => {
 const contacts = [];
 
 app.get('/contacts', (req, res) => {
+    res.send(contacts.sort((a, b) => (a.name > b.name) ? 1 : -1));
+})
+
+// just an idea for an end point, this could send only the differences between
+// provided contact list and the servers contact list. 
+app.get('/contacts/new', (req, res) => {
     res.send(contacts);
 })
 
