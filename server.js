@@ -27,6 +27,6 @@ app.put('/contacts/:id', (req, res) => {
 })
 
 app.delete('/contacts/:id', (req, res) => {
-    contacts.splice(contacts.findIndex(val => val.id === req.params.id), 1);
+    contacts.splice(contacts.findIndex(val => val.id == req.params.id), 1);
     res.status(200).send(req.params.id);
 })
