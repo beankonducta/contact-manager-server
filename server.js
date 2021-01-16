@@ -16,6 +16,12 @@ app.get('/contacts', (req, res) => {
     res.send(contacts.sort((a, b) => (a.name > b.name) ? 1 : -1));
 })
 
+app.get('/contacts/:sortType/:sortDir', (req, res) => {
+    res.send(req.params.sortDir === 'desc' ? 
+    contacts.sort((a, b) => (a[req.params.sortType] > b[req.params.sortType]) ? 1 : -1)
+    : contacts.sort((a, b) => (a[req.params.sortType] < b[req.params.sortType]) ? 1 : -1));
+})
+
 app.post('/contacts', (req, res) => {
     contacts.push(req.body);
     res.status(200).send(req.body);
