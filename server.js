@@ -48,7 +48,7 @@ app.post('/contacts', async (req, res) => {
 // update contact by id
 app.put('/contacts/:id', async (req, res) => {
     try {
-        const contact = await contactModel.findOneAndUpdate({ id: req.params.id }, req.body, {useFindAndModify : false});
+        const contact = await contactModel.findOneAndUpdate({ _id: req.params.id }, req.body, {useFindAndModify : false});
         res.status(200).send(contact);
     } catch {
         res.status(404).send("Contact doesn't exist!");
@@ -58,7 +58,7 @@ app.put('/contacts/:id', async (req, res) => {
 // delete contact by id
 app.delete('/contacts/:id', async (req, res) => {
     try {
-        const contact = await contactModel.deleteOne({ id: req.params.id });
+        const contact = await contactModel.deleteOne({ _id: req.params.id });
         res.status(200).send(contact);
     } catch {
         res.status(404).send("Contact doesn't exist!");
