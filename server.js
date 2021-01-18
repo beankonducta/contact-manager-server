@@ -15,7 +15,6 @@ app.use(express.urlencoded({ extended: true }))
 app.listen(3000, () => {
 })
 
-// default get all contacts sorted by name
 app.get('/contacts', async (req, res) => {
     try {
         const contacts = await contactModel.find().sort({name: "desc"});
@@ -25,7 +24,6 @@ app.get('/contacts', async (req, res) => {
     }
 })
 
-// get all contacts sorted by 'type' and 'direction'
 app.get('/contacts/:sortType/:sortDir', async (req, res) => {
     try {
         const contacts = await contactModel.find().sort({[req.params.sortType]: req.params.sortDir});
@@ -35,7 +33,6 @@ app.get('/contacts/:sortType/:sortDir', async (req, res) => {
     }
 })
 
-// post a new contact
 app.post('/contacts', async (req, res) => {
     try {
         const contact = await new contactModel({ ...req.body }).save();
@@ -45,7 +42,6 @@ app.post('/contacts', async (req, res) => {
     }
 })
 
-// update contact by id
 app.put('/contacts/:id', async (req, res) => {
     try {
         const contact = await contactModel.findOneAndUpdate({ _id: req.params.id }, req.body, {useFindAndModify : false});
@@ -55,7 +51,6 @@ app.put('/contacts/:id', async (req, res) => {
     }
 })
 
-// delete contact by id
 app.delete('/contacts/:id', async (req, res) => {
     try {
         const contact = await contactModel.deleteOne({ _id: req.params.id });
