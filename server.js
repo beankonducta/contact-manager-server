@@ -15,12 +15,12 @@ app.use(express.urlencoded({ extended: true }))
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-    console.log('Listening on port 3000.');
+    console.log(`Listening on port ${PORT}`);
 })
 
 app.get('/contacts', async (req, res) => {
     try {
-        const contacts = await contactModel.find().sort({name: "desc"});
+        const contacts = await contactModel.find().sort({ name: "desc" });
         res.status(200).send(contacts);
     } catch {
         res.status(500).send("Error fetching contacts!");
@@ -29,7 +29,7 @@ app.get('/contacts', async (req, res) => {
 
 app.get('/contacts/:sortType/:sortDir', async (req, res) => {
     try {
-        const contacts = await contactModel.find().sort({[req.params.sortType]: req.params.sortDir});
+        const contacts = await contactModel.find().sort({ [req.params.sortType]: req.params.sortDir });
         res.status(200).send(contacts);
     } catch {
         res.status(500).send("Error fetching contacts!");
@@ -47,7 +47,7 @@ app.post('/contacts', async (req, res) => {
 
 app.put('/contacts/:id', async (req, res) => {
     try {
-        const contact = await contactModel.findOneAndUpdate({ _id: req.params.id }, req.body, {useFindAndModify : false});
+        const contact = await contactModel.findOneAndUpdate({ _id: req.params.id }, req.body, { useFindAndModify: false });
         res.status(200).send(contact);
     } catch {
         res.status(404).send("Contact doesn't exist!");
